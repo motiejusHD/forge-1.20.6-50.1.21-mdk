@@ -1,6 +1,9 @@
 package net.MotiejusHD.TutorialMod;
 
 import com.mojang.logging.LogUtils;
+import net.MotiejusHD.TutorialMod.item.ModCreativeModeTabs;
+import net.MotiejusHD.TutorialMod.item.ModItems;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -28,6 +31,10 @@ public class TutorialMod
     {
         IEventBus modEventBus = context.getModEventBus();
 
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+
 
         modEventBus.addListener(this::commonSetup);
 
@@ -52,6 +59,10 @@ public class TutorialMod
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
+        if(event.getTabKey()== CreativeModeTabs.INGREDIENTS){
+            event.accept(ModItems.SKIBIDI);
+            event.accept(ModItems.MANGO);
+        }
 
     }
 
